@@ -42,17 +42,19 @@ const menuCards = [
 export default function Page() {
   return (
     <main id="top" className="min-h-screen bg-[#f7f6f3]">
+      <div id="top" />
       <FloatingNav />
 
       {/* HERO */}
       <section className="relative h-[86vh] min-h-[560px] w-full overflow-hidden">
         <Image
-          alt="Ça Graille - burger"
-          src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=2400&q=80"
+          alt="Cagraille - Burger"
+          src="/images/hero-cagraille.png"
           fill
           priority
           className="object-cover"
         />
+
         <div className="absolute inset-0 bg-black/55" />
 
         <div className="relative mx-auto flex h-full max-w-6xl flex-col items-center justify-center px-4 text-center text-white">
@@ -103,6 +105,7 @@ export default function Page() {
 
       {/* MENU */}
       <section id="menu" className="mx-auto max-w-6xl px-4 py-20">
+        <div id="top" />
         <div className="text-center">
           <h2 className="text-5xl font-semibold tracking-tight">Notre Menu</h2>
           <p className="mt-4 text-black/60">

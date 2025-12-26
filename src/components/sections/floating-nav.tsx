@@ -1,16 +1,32 @@
 "use client";
 
-import { Home, Menu as MenuIcon, Info, PhoneCall, Star } from "lucide-react";
+import React, { useMemo } from "react";
+import { Home, UtensilsCrossed, Info, MessageSquare, Phone } from "lucide-react";
 import { AnimeNavBar } from "@/components/ui/anime-navbar";
 
-const navItems = [
-  { name: "Accueil", url: "#top", icon: Home },
-  { name: "Menu", url: "#menu", icon: MenuIcon },
-  { name: "À propos", url: "#about", icon: Info },
-  { name: "Avis", url: "#avis", icon: Star },
-  { name: "Contact", url: "#contact", icon: PhoneCall },
-];
-
 export function FloatingNav() {
-  return <AnimeNavBar items={navItems} defaultActive="Accueil" />;
+  const sections = useMemo(
+    () => [
+      { name: "Accueil", id: "top", icon: Home },
+      { name: "Menu", id: "menu", icon: UtensilsCrossed },
+      { name: "À propos", id: "about", icon: Info },
+      { name: "Avis", id: "avis", icon: MessageSquare },
+      { name: "Contact", id: "contact", icon: Phone },
+    ],
+    []
+  );
+
+  const items = sections.map((s) => ({
+    name: s.name,
+    url: `#${s.id}`,
+    icon: s.icon,
+  }));
+
+  return (
+    <AnimeNavBar
+      items={items}
+      defaultActive="Accueil"
+      topOffsetPx={45}   // baisse un peu la navbar
+    />
+  );
 }
