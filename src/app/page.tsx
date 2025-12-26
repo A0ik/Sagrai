@@ -49,7 +49,7 @@ export default function Page() {
       <section className="relative h-[86vh] min-h-[560px] w-full overflow-hidden">
         <Image
           alt="Cagraille - Burger"
-          src="/images/hero-cagraille.png"
+          src="/images/hero-cagraille.jpg"
           fill
           priority
           className="object-cover"
