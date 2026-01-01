@@ -1,10 +1,16 @@
 import Image from "next/image";
 import { ChefHat, Heart, Zap } from "lucide-react";
+
 import { TestimonialsSection } from "@/components/sections/testimonials";
 import { FloatingNav } from "@/components/sections/floating-nav";
+import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
+import { ContainerScroll } from "@/components/ui/container-scroll-animation";
+import { TimelineSection } from "@/components/sections/timeline-section";
 
-const DELIVEROO =
-  "https://deliveroo.fr/fr/menu/paris/ozoir-la-ferriere/ca-graille";
+
+
+const UBEREAT =
+  "https://www.ubereats.com/fr/store/ca-graille/r1OmdFeyTTWBY7F2nCgUWQ";
 
 const GMAPS =
   "https://www.google.com/maps/place//data=!4m2!3m1!1s0x47e665651878a2e9:0x9808f41daf9f23b2?sa=X&ved=1t:8290&ictx=111";
@@ -42,7 +48,6 @@ const menuCards = [
 export default function Page() {
   return (
     <main id="top" className="min-h-screen bg-[#f7f6f3]">
-      <div id="top" />
       <FloatingNav />
 
       {/* HERO */}
@@ -67,6 +72,7 @@ export default function Page() {
           </p>
 
           <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
+            {/* Bouton normal */}
             <a
               href="#menu"
               className="rounded-full bg-orange-500 px-6 py-3 text-sm font-semibold text-white hover:bg-orange-600"
@@ -74,13 +80,17 @@ export default function Page() {
               Voir le menu
             </a>
 
+            {/* Bouton animé: WRAP dans un <a> car le composant est un <button> */}
             <a
-              href={DELIVEROO}
+              href={UBEREAT}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-full border border-white/20 bg-white/10 px-6 py-3 text-sm font-semibold text-white backdrop-blur hover:bg-white/15"
+              className="inline-flex"
             >
-              Commander (Deliveroo)
+              <InteractiveHoverButton
+                text="Commander (Uber Eats)"
+                className="w-64 border-orange-500 bg-white/10 text-white backdrop-blur hover:bg-white/15"
+              />
             </a>
           </div>
 
@@ -103,9 +113,34 @@ export default function Page() {
         </div>
       </section>
 
+      {/* SCROLL TABLET (avant Menu) */}
+<section className="bg-[#f7f6f3]">
+  <ContainerScroll
+    titleComponent={
+      <>
+        <p className="text-sm sm:text-base text-black/60">
+          Un aperçu rapide, avant de craquer.
+        </p>
+        <h2 className="mt-3 text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-black">
+          Ça graille
+          <br />
+          <span className="text-orange-700">Menu & spécialités</span>
+        </h2>
+      </>
+    }
+  >
+    {/* ✅ Ton image custom dans la tablette */}
+    <img
+      src="/images/tablette.jpg"
+      alt="Aperçu du menu"
+      className="h-full w-full object-cover rounded-2xl"
+      draggable={false}
+    />
+  </ContainerScroll>
+</section>
+
       {/* MENU */}
       <section id="menu" className="mx-auto max-w-6xl px-4 py-20">
-        <div id="top" />
         <div className="text-center">
           <h2 className="text-5xl font-semibold tracking-tight">Notre Menu</h2>
           <p className="mt-4 text-black/60">
@@ -136,15 +171,21 @@ export default function Page() {
 
         <div className="mt-10 flex justify-center">
           <a
-            href={DELIVEROO}
+            href={UBEREAT}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-full bg-orange-500 px-7 py-3 text-sm font-semibold text-white hover:bg-orange-600"
+            className="inline-flex"
           >
-            Commander sur Deliveroo
+            <InteractiveHoverButton
+              text="Commander sur UberEats"
+              className="w-64 border-orange-500 bg-orange-500 text-white hover:bg-orange-600"
+            />
           </a>
         </div>
       </section>
+
+      <TimelineSection uberEatsUrl={UBEREAT} />
+
 
       {/* ABOUT */}
       <section id="about" className="bg-white py-20">
@@ -196,91 +237,92 @@ export default function Page() {
       <TestimonialsSection />
 
       {/* CONTACT */}
-      {/* CONTACT */}
-<section id="contact" className="bg-white py-20">
-  <div className="mx-auto max-w-6xl px-4">
-    <div className="text-center">
-      <h2 className="text-5xl font-semibold tracking-tight">Contact</h2>
-      <p className="mt-4 text-black/60">Les vraies infos, pas du Lorem Ipsum.</p>
-    </div>
+      <section id="contact" className="bg-white py-20">
+        <div className="mx-auto max-w-6xl px-4">
+          <div className="text-center">
+            <h2 className="text-5xl font-semibold tracking-tight">Contact</h2>
+            <p className="mt-4 text-black/60">
+              Les vraies infos, pas du Lorem Ipsum.
+            </p>
+          </div>
 
-    <div className="mt-12 grid gap-8 lg:grid-cols-2 lg:items-stretch">
-      {/* COL GAUCHE: contact card */}
-      <div className="rounded-2xl border bg-[#f7f6f3] p-8">
-        <h3 className="text-xl font-semibold">📞 Téléphone</h3>
-        <a
-          className="mt-3 inline-block font-semibold text-orange-600 hover:underline"
-          href={`tel:${PHONE_TEL}`}
-        >
-          {PHONE_DISPLAY}
-        </a>
+          <div className="mt-12 grid gap-8 lg:grid-cols-2 lg:items-stretch">
+            {/* COL GAUCHE */}
+            <div className="rounded-2xl border bg-[#f7f6f3] p-8">
+              <h3 className="text-xl font-semibold">📞 Téléphone</h3>
+              <a
+                className="mt-3 inline-block font-semibold text-orange-600 hover:underline"
+                href={`tel:${PHONE_TEL}`}
+              >
+                {PHONE_DISPLAY}
+              </a>
 
-        <h3 className="mt-8 text-xl font-semibold">📍 Adresse</h3>
-        <p className="mt-3 text-black/60">{ADDRESS}</p>
+              <h3 className="mt-8 text-xl font-semibold">📍 Adresse</h3>
+              <p className="mt-3 text-black/60">{ADDRESS}</p>
 
-        <h3 className="mt-8 text-xl font-semibold">📷 Instagram</h3>
-        <a
-          className="mt-3 inline-block font-semibold text-orange-600 hover:underline"
-          href={INSTAGRAM}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          instagram.com/cagraille.restaurant
-        </a>
+              <h3 className="mt-8 text-xl font-semibold">📷 Instagram</h3>
+              <a
+                className="mt-3 inline-block font-semibold text-orange-600 hover:underline"
+                href={INSTAGRAM}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                instagram.com/cagraille.restaurant
+              </a>
 
-        <div className="mt-8 flex flex-wrap gap-3">
-          <a
-            className="rounded-full bg-orange-500 px-5 py-3 text-sm font-semibold text-white hover:bg-orange-600"
-            href={DELIVEROO}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Commander (Deliveroo)
-          </a>
-          <a
-            className="rounded-full border bg-white px-5 py-3 text-sm font-semibold hover:bg-[#fff7ed]"
-            href={GMAPS}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Itinéraire (Google Maps)
-          </a>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <a
+                  className="rounded-full bg-orange-500 px-5 py-3 text-sm font-semibold text-white hover:bg-orange-600"
+                  href={UBEREAT}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Commander (UberEats)
+                </a>
+                <a
+                  className="rounded-full border bg-white px-5 py-3 text-sm font-semibold hover:bg-[#fff7ed]"
+                  href={GMAPS}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Itinéraire (Google Maps)
+                </a>
+              </div>
+
+              <div className="mt-10 rounded-2xl border bg-white p-6">
+                <h4 className="font-semibold">Horaires</h4>
+                <ul className="mt-3 space-y-2 text-black/70 text-sm">
+                  <li>Mercredi : 11:00–15:00, 18:00–23:00</li>
+                  <li>Jeudi : 11:00–15:00, 18:00–23:00</li>
+                  <li>Vendredi : 11:00–15:00, 18:00–00:00</li>
+                  <li>Samedi : 11:00–15:00, 18:00–00:00</li>
+                  <li>Dimanche : 18:00–23:00</li>
+                  <li>Lundi : 18:00–23:00</li>
+                  <li>Mardi : 11:00–15:00, 18:00–23:00</li>
+                </ul>
+              </div>
+            </div>
+
+            {/* COL DROITE (MAP) */}
+            <div className="overflow-hidden rounded-2xl border bg-white shadow-sm min-h-[520px] lg:min-h-0 lg:h-full">
+              <div className="relative h-full w-full">
+                <iframe
+                  title="Carte Ça Graille"
+                  src={MAP_EMBED}
+                  className="absolute inset-0 h-full w-full"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+              </div>
+            </div>
+          </div>
+
+          <footer className="mt-16 text-center text-sm text-black/50">
+            © {new Date().getFullYear()} Ça graille. Tous droits réservés.
+          </footer>
         </div>
-
-        <div className="mt-10 rounded-2xl border bg-white p-6">
-          <h4 className="font-semibold">Horaires</h4>
-          <ul className="mt-3 space-y-2 text-black/70 text-sm">
-            <li>Mercredi : 11:00–15:00, 18:00–23:00</li>
-            <li>Jeudi : 11:00–15:00, 18:00–23:00</li>
-            <li>Vendredi : 11:00–15:00, 18:00–00:00</li>
-            <li>Samedi : 11:00–15:00, 18:00–00:00</li>
-            <li>Dimanche : 18:00–23:00</li>
-            <li>Lundi : 18:00–23:00</li>
-            <li>Mardi : 11:00–15:00, 18:00–23:00</li>
-          </ul>
-        </div>
-      </div>
-
-      {/* COL DROITE: map alignée (même hauteur) */}
-      <div className="overflow-hidden rounded-2xl border bg-white shadow-sm min-h-[520px] lg:min-h-0 lg:h-full">
-        <div className="relative h-full w-full">
-          <iframe
-            title="Carte Ça Graille"
-            src={MAP_EMBED}
-            className="absolute inset-0 h-full w-full"
-            style={{ border: 0 }}
-            allowFullScreen
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          />
-        </div>
-      </div>
-    </div>
-
-    <footer className="mt-16 text-center text-sm text-black/50">
-      © {new Date().getFullYear()} Ça graille. Tous droits réservés.
-    </footer>
-  </div>
       </section>
     </main>
   );

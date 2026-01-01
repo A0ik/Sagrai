@@ -27,9 +27,8 @@ body {
   --primary: 24 95% 53%; /* orange-ish */
   --primary-foreground: 0 0% 100%;
 }
+
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 120px;
 }
-
-
